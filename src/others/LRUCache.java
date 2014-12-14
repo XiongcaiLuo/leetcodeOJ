@@ -1,120 +1,75 @@
-package others;
+package tails;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
+/**
+ * Design and implement a data structure for Least Recently Used (LRU) cache. It should support the following operations: get and set.
 
-
-class Node{
-	int key;
+get(key) - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.
+set(key, value) - Set or insert the value if the key is not already present. When the cache reached its capacity, it should invalidate the least recently used item before inserting a new item.
+ * @author luoxiongcai
+ *
+ */
+class ValTime {
 	int value;
-	Node pre;
-	Node next;
-	Node(int key,int value){
-		this.key= key;
-		this.value=value;
-		pre=null;
-		next=null;
-	}
-}
-
-class MyDqueue{
-	Node dummy=new Node(-1,-1);
-	Node endPtr=dummy;
-	int length=0;
-	
-	public void offerFirst(Node n){
-		if(length == 0){
-			dummy.next=n;
-			n.pre=dummy;
-			length++;
-			endPtr=n;
-			return;
-		}
-		Node oldFirst=dummy.next;
-		dummy.next=n;
-		n.pre=dummy;
-		n.next=oldFirst;
-		oldFirst.pre=n;
-		length++;
-			
-	}
-	
-	public void moveToFirst(Node n){
-		if(length==0 || length ==1)
-			return;
-		if(n==endPtr){
-			delEnd();
-			offerFirst(n);
-			return ;
-		}
-		else if(n==dummy.next)
-			return;
-		Node nPre = n.pre , nNext=n.next;
-		nPre.next=nNext;
-		nNext.pre=nPre;
-		offerFirst(n);
-	}
-	
-	public Node delEnd(){
-		if(length == 0) return null;
-		Node del=endPtr;
-		endPtr=del.pre;
-		endPtr.next=null;
-		length--;
-		return del;
-		
+	int timeStamp;
+	ValTime(int value, int timeStamp){
+		this.value = value;
+		this.timeStamp = timeStamp;
 	}
 }
 
 public class LRUCache {
-
-	private int capacity;
-	HashMap<Integer, Node> maps=new HashMap<Integer, Node>();
-	MyDqueue dq=new MyDqueue();
-	
+	public int capacity;
+	public int timeStamp;
+	public HashMap<Integer,ValTime> data;
     public LRUCache(int capacity) {
-        this.capacity=capacity;
+        this.capacity = capacity;
+        timeStamp=Integer.MIN_VALUE+1;
+        data =  new HashMap<Integer, ValTime>();
     }
     
     public int get(int key) {
-    	Node cur=maps.get(key);
-    	if(cur == null) return -1;
-    	dq.moveToFirst(cur);
-    	return cur.value;
+    	if(!data.containsKey(key)) return -1;
+    	int n=data.get(key).value;
+    	data.put(key, new ValTime(n,timeStamp++));
+    	return n;
     }
     
     public void set(int key, int value) {
-    	Node cur=maps.get(key);
-    	if(cur !=null){
-    		cur.value=value;
-    		dq.moveToFirst(cur);
-    		return;
-    	}
-    	
-    	if(maps.size()==capacity){
-    		Node del=dq.delEnd();
-    		maps.remove(del.key);
-    	}
-		Node n=new Node(key,value);
-		maps.put(key, n);
-		dq.offerFirst(n);
+        if(data.containsKey(key))
+        	data.put(key, new ValTime(value,timeStamp++));
+        else{
+        	if(capacity>data.size())
+        		data.put(key, new ValTime(value,timeStamp++));
+        	else{
+        		int minKey=Integer.MIN_VALUE;
+        		int minTime=Integer.MIN_VALUE;
+        		Iterator<Entry<Integer,ValTime>> ite= data.entrySet().iterator();
+        		while(ite.hasNext()){
+        			Entry<Integer,ValTime> en=ite.next();
+        			if(en.getValue().timeStamp < minTime){
+        				minTime=en.getValue().timeStamp;
+        				minKey=en.getKey();
+        			}
+        		}
+        		data.remove(key);
+        		data.put(key, new ValTime(value,timeStamp++));
+        	}
+        }
     }
     
- 
-    
-	public static void main(String[] args) {
-		LRUCache t=new LRUCache(2);
-		t.set(2,1);
-		t.set(1,1);
-		t.set(2,3);
-		t.set(4,1);
-		int a=t.get(1);
-		System.out.println(a);
-		int b=t.get(2);
-		System.out.println(b);
-		
-
-
-	}
-
+    public static void main(String[] args){
+    	TreeMap<Integer,ValTime> data= new TreeMap<Integer, ValTime>();
+    	data.put(1, new ValTime(1,-3));
+    	data.put(2, new ValTime(1,-95));
+    	data.put(-1, new ValTime(1,-700));
+    	data.put(0, new ValTime(1,6));
+    	
+    	System.out.println(data.lastEntry().getValue().timeStamp);
+    	
+    }
 }
