@@ -1,16 +1,29 @@
 package others;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
-public class MergeIntervals {
+ class Interval {
+   int start;
+     int end;
+    Interval() { start = 0; end = 0; }
+    Interval(int s, int e) { start = s; end = e; }
+}
+
+public class InsertInterval {
 
 	/**
-	 * Given a collection of intervals, merge all overlapping intervals.
+	 * Given a set of non-overlapping intervals, insert a new interval into the intervals (merge if necessary).
 
-For example,
-Given [1,3],[2,6],[8,10],[15,18],
-return [1,6],[8,10],[15,18].
+You may assume that the intervals were initially sorted according to their start times.
+
+Example 1:
+Given intervals [1,3],[6,9], insert and merge [2,5] in as [1,5],[6,9].
+
+Example 2:
+Given [1,2],[3,5],[6,7],[8,10],[12,16], insert and merge [4,9] in as [1,2],[3,10],[12,16].
+
+This is because the new interval [4,9] overlaps with [3,5],[6,7],[8,10].
 	 * @param args
 	 */
     public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
@@ -18,7 +31,7 @@ return [1,6],[8,10],[15,18].
     		intervals.add(newInterval);
     		return intervals;
     	}
-    	List<Interval> result=new LinkedList<Interval>();
+    	List<Interval> result=new ArrayList<Interval>();
     	int size=intervals.size();
     	if(intervals.get(0).start>newInterval.end){
     		result.add(newInterval);
@@ -50,18 +63,11 @@ return [1,6],[8,10],[15,18].
     		
         	
     }
-    public List<Interval> merge(List<Interval> intervals) {
-        int size=intervals.size();
-        if(size==1) return intervals;
-        List<Interval> result=new LinkedList<Interval>();
-        for(int i=1;i<size;i++){
-        	result=insert(result,intervals.get(i));
-        }
-        return result;
-    }
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		List<Interval> intervals=new ArrayList<Interval>();
+		intervals.add(new Interval(1,5));
+		InsertInterval t=new InsertInterval();
+		t.insert(intervals, new Interval(2,3));
 	}
 
 }

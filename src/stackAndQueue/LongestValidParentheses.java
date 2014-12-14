@@ -12,33 +12,29 @@ For "(()", the longest valid parentheses substring is "()", which has length = 2
 Another example is ")()())", where the longest valid parentheses substring is "()()", which has length = 4.
 	 * @param args
 	 */
-    public static int longestValidParentheses(String s) {
-        Stack<Character> stack=new Stack<Character>();
-        int maxLen=0,ptr=0;
-        for(Character c:s.toCharArray()){
-        	ptr++;
-        	if(c.equals('('))
-        		stack.push(c);
-        	else{
-        		if(stack.isEmpty()||!stack.peek().equals('(')){
-          			// bad
-        			int curLen=ptr-stack.size()-1;
-        			maxLen=Math.max(curLen, maxLen);
-        			ptr=0;
-        		}
-        		else{
-        			stack.pop();
-        		}
-        	}
-        }
-		int curLen=ptr-stack.size();
-		maxLen=Math.max(curLen, maxLen);
-        return maxLen;
-    }
+	 public static int longestValidParentheses(String s) {
+	        if(s==null || s.isEmpty()) return 0;
+	        Stack<Integer> leftIndex=new Stack<>();
+	        int max=0,lastRight=-1;
+	        for(int i=0;i<s.length();i++){
+	        	if(s.charAt(i)=='(')
+	        		leftIndex.push(i);
+	        	else{
+	        		if(!leftIndex.isEmpty()){
+	        			leftIndex.pop();
+	        			if(leftIndex.isEmpty())
+	        				max=Math.max(max, i-lastRight);
+	        			else max=Math.max(max, i-leftIndex.peek());
+	        		}else{
+	        			lastRight=i;
+	        		}
+	        	}
+	        }
+
+	        return max;
+	    }
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		String s="()(()";
-		System.out.println(longestValidParentheses( s));
+		System.out.println(longestValidParentheses("()()(()"));
 	}
 
 }
