@@ -41,7 +41,7 @@ If n = 4 and k = 2, a solution is:
     		result.add(temp);
     		return;
     	}else{
-    		ArrayList<Integer> other=new ArrayList<>(temp);
+    		ArrayList<Integer> other=new ArrayList<Integer>(temp);
     		other.add(level);
     		dfs(result,temp,level+1,n,k);
     		dfs(result,other,level+1,n,k);

@@ -25,7 +25,7 @@ public class NQueensII {
 		}
 		for(int col=1;col<=n;col++){
 			if(isValid(pos,level,col)){
-				ArrayList<Integer> next=new ArrayList<>(pos);
+				ArrayList<Integer> next=new ArrayList<Integer>(pos);
 				next.add(col);
 				dfs(next, level+1, n);
 			}

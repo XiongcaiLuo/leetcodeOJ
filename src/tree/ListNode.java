@@ -5,8 +5,8 @@ public class ListNode {
 	/**
 	 * @param args
 	 */
-	int val;
-	ListNode next;
+	public int val;
+	public ListNode next;
 
 	public ListNode(int x) {
 		val = x;
