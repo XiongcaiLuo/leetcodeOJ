@@ -1,4 +1,4 @@
-package oj.list;
+package string;
 
 import java.util.HashMap;
 

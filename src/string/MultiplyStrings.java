@@ -1,4 +1,4 @@
-package oj.string;
+package string;
 
 import java.math.BigInteger;
 

@@ -1,32 +1,23 @@
-package oj;
+package list;
 
 public class PlusOne {
 
 	/**
+	 * may change the orgitin digits array.
 	 * @param args
 	 */    
 	public static int[] plusOne(int[] digits) {
-	        int len=digits.length;
-	        int jinwei=1;
-	        int i=len-1;
-	        for( i=len-1;i>=0;i--){
-	        	if(digits[i]+jinwei==10){
-	        		digits[i]=0;
-	        	}
+	        for(int i = digits.length - 1; i >= 0; i--){
+	        	if (digits[i] == 9)
+	        		digits[i] = 0;
 	        	else {
-	        		digits[i]+=jinwei;
-	        		break;
-	        	}	        	
-	        }
-	        if(i==-1){
-	        	int[] result=new int[len+1];
-	        	result[0]=1;
-	        	for(int k=1;k<=len;k++){
-	        		result[k]=0;
+	        		digits[i] += 1;
+	        		return digits;
 	        	}
-	        	return result;
 	        }
-	        return digits;
+	        int [] newResult = new int[digits.length + 1];
+	        newResult[0] = 1;
+	        return newResult;
 	    }
 	public static void print(int[] digits){
 		for(int i=0;i<digits.length;i++){

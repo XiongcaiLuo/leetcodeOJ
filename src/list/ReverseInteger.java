@@ -1,26 +1,35 @@
-package oj;
+package list;
 
+/**
+ * Reverse digits of an integer. For example: x = 123, return 321. Example
+ * Questions Candidate Might Ask: Q: What about negative integers? A: For input
+ * x = –123, you should return –321. Q: What if the integer’s last digit is 0?
+ * For example, x = 10, 100, … A: Ignore the leading 0 digits of the reversed
+ * integer. 10 and 100 are both reversed as 1. Q: What if the reversed integer
+ * overflows? For
+ * 
+ * @author luoxiongcai
+ *
+ */
 public class ReverseInteger {
 
 	/**
 	 * @param args
 	 */
-    public static int reverse(int x) {
-    	if(x==0) return 0;   	
-       int sign=-1;
-        if(x>0) sign=1;
-        int absx=Math.abs(x);
-        String s=String.valueOf(absx);
-        StringBuffer revers=new StringBuffer();
-        int len=s.length();
-        for(int i=0;i<len;i++)
-        	revers.append(s.charAt(len-1-i));
-        int reInt=Integer.valueOf(revers.toString());
-        return sign*reInt;
-    }
+	public static int reverse(int x) {
+		int ret = 0;
+		while ( x != 0){
+			if ( Math.abs(ret) > 214748364)  // overflow
+				return 0;
+			ret =  ret * 10 + x % 10;
+			x = x / 10;
+		}
+		return ret;
+	}
+
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println(reverse(1));
+		
+		System.out.println(reverse(-123));
 
 	}
 

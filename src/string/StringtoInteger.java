@@ -45,7 +45,7 @@ public class StringtoInteger {
 				return sign == -1 ? Integer.MIN_VALUE : Integer.MAX_VALUE;
 			num = num * 10 + str.charAt(i) - '0';
 			i++;
-		}
+		} 
 		return num * sign;
 	}
 
