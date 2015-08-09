@@ -1,4 +1,4 @@
-package oj;
+package list;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

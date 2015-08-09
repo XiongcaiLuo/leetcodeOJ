@@ -1,18 +1,19 @@
 package list;
 
-class ListNode{
-    int val;
-    ListNode next;
-    ListNode(int x) {
-        val = x;
-        next = null;
-    }
-}
+
 public class AddTwoNumers {
 
 	/**
 	 * @param args
 	 */
+	private static class ListNode{
+	    int val;
+	    ListNode next;
+	    ListNode(int x) {
+	        val = x;
+	        next = null;
+	    }
+	}
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode p1=l1;
         ListNode p2=l2;

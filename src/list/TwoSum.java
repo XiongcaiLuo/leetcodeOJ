@@ -1,4 +1,4 @@
-package oj.list;
+package list;
 
 import java.util.HashMap;
 

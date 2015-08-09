@@ -1,4 +1,4 @@
-package oj.string;
+package string;
 
 import java.util.HashMap;
 
@@ -71,11 +71,27 @@ Returns the index of the first occurrence of needle in haystack, or -1 if needle
     	
     }
     
+    public int strStr2(String haystack, String needle ){
+    	if(needle.isEmpty())
+    		return 0;
+    	if(haystack.isEmpty())
+    		return -1;
+    	for(int i = 0; i <= haystack.length() - needle.length(); i++){
+    		int j=0;
+    		for(; j < needle.length(); j++){
+    			if(haystack.charAt(i+j) != needle.charAt(j))
+    				break;
+    		}
+    		if( j == needle.length())
+    			return i;
+    	}
+    	return -1;
+    }
 
     
 	public static void main(String[] args) {
 		StrStr t= new StrStr();
-		int index=t.strStr("babba", "bbb");
+		int index=t.strStr2("babba", "bb");
 		System.out.println(index);
 	}
 

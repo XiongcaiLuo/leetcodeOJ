@@ -1,4 +1,4 @@
-package oj.string;
+package string;
 
 public class ValidPalindrome {
 /**
@@ -12,21 +12,20 @@ Note:
 Have you consider that the string might be empty? This is a good question to ask during an interview.
 
 For the purpose of this problem, we define empty string as valid palindrome.
+method: Character.isLetterOrDigit(char c);
  * @param s
  * @return
  */
     public boolean isPalindrome(String s) {
-    	if(s==null||s.isEmpty()) return true;
-    	String regex="[^\\w]";
-    	String cs=s.replaceAll(regex,"").toLowerCase().trim();
-    	if(cs.isEmpty()||cs.length()==1) return true;
-    	int ptr1=0,ptr2=cs.length()-1;
-    	while(ptr1<ptr2){
-    		if(cs.charAt(ptr1)!=cs.charAt(ptr2))
+    	if(s.isEmpty()) return true;
+    	int i = 0, j = s.length() - 1;
+    	while (i < j){
+    		while(i < j && !Character.isLetterOrDigit(s.charAt(i))) i++;
+    		while(i < j && !Character.isLetterOrDigit(s.charAt(j))) j--;
+    		if(Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j)))
     			return false;
-    		ptr1++;
-    		ptr2--;
-
+    		i++;
+    		j--;
     	}
 		return true;
     	
