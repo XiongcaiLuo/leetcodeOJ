@@ -25,7 +25,7 @@ public class Permutations {
         if(num==null||num.length==0) return result;
         len=num.length;
         numSet=new HashSet<Integer>(new ArrayList(Arrays.asList(num)));
-        ArrayList<Integer> temp=new ArrayList<>();
+        ArrayList<Integer> temp=new ArrayList<Integer>();
         dfs(0,temp,result);
         return result;
 	}
