@@ -1,4 +1,4 @@
-package tails;
+package others;
 
 import java.util.HashMap;
 import java.util.Iterator;

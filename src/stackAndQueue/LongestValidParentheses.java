@@ -14,7 +14,7 @@ Another example is ")()())", where the longest valid parentheses substring is "(
 	 */
 	 public static int longestValidParentheses(String s) {
 	        if(s==null || s.isEmpty()) return 0;
-	        Stack<Integer> leftIndex=new Stack<>();
+	        Stack<Integer> leftIndex=new Stack<Integer>();
 	        int max=0,lastRight=-1;
 	        for(int i=0;i<s.length();i++){
 	        	if(s.charAt(i)=='(')

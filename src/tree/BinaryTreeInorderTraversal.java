@@ -10,9 +10,9 @@ public class BinaryTreeInorderTraversal {
 	 * @param args
 	 */
     public List<Integer> inorderTraversal(TreeNode root) {
-    	ArrayList<Integer> orders=new ArrayList<>();
+    	ArrayList<Integer> orders=new ArrayList<Integer>();
     	if(root==null) return orders;
-    	Stack<TreeNode> parents=new Stack<>();
+    	Stack<TreeNode> parents=new Stack<TreeNode>();
     	parents.push(root);
     	TreeNode ptr=null;
     	while(!parents.isEmpty()){

@@ -29,7 +29,7 @@ If S = [1,2,3], a solution is:
 	 */
     public List<List<Integer>> subsets(int[] S) {
         ArrayList<List<Integer>> result=new ArrayList<List<Integer>>();
-        ArrayList<Integer> temp=new ArrayList<>();
+        ArrayList<Integer> temp=new ArrayList<Integer>();
         Arrays.sort(S);
         subsets(S,0,temp,result);
         return result;
@@ -39,7 +39,7 @@ If S = [1,2,3], a solution is:
     		result.add(temp);
     		return;
     	}
-    	ArrayList<Integer> another=new ArrayList<>(temp);
+    	ArrayList<Integer> another=new ArrayList<Integer>(temp);
     	subsets(S,level+1,temp,result);
     	another.add(S[level]);
     	subsets(S,level+1,another,result);

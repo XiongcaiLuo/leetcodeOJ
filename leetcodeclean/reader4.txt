@@ -1,0 +1,4 @@
+﻿15. Read N Characters Given Read4
+public class Solution extends Reader4 {
+	
+}

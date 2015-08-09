@@ -1,0 +1,11 @@
+﻿46. Maximum Product Subarray
+public int maxProduct(int[] nums) {
+	if (nums == null || nums.length ==0) return 0;
+	int cmax = nums[0], cmin = nums[0], max = nums[0];
+	for(int i=1;i<nums.length;i++){
+		cmax = Math.max(Math.max(nums[i] * cmax, nums[i] * cmin),nums[i]);
+		cmin = Math.min(Math.min(nums[i] * cmax, nums[i] * cmin),nums[i]);
+		max = Math.max(max, cmax);
+	}
+	return max;
+}

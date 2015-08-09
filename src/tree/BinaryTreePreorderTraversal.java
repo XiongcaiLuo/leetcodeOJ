@@ -21,10 +21,10 @@ return [1,2,3].
 	 */
 	
     public static List<Integer> preorderTraversal(TreeNode root) {
-    	ArrayList<Integer> orders=new ArrayList<>();
+    	ArrayList<Integer> orders=new ArrayList<Integer>();
     	if(root==null) return orders;
     	orders.add(root.val);
-    	Stack<TreeNode> parents=new Stack<>();
+    	Stack<TreeNode> parents=new Stack<TreeNode>();
     	parents.push(root);
     	TreeNode ptr=null;
     	while(!parents.isEmpty()){
@@ -46,11 +46,40 @@ return [1,2,3].
     	return orders;
     }
 
+    /**
+     * 
+     * @param root
+     * @return
+     */
+    public static List<Integer> preorderTraversal2(TreeNode root) {
+    	ArrayList<Integer> orders=new ArrayList<Integer>();
+    	if(root==null) return orders;
+    	Stack<TreeNode> nodes=new Stack<TreeNode>();
+    	nodes.add(root);
+    	while (!nodes.isEmpty()) {
+    		TreeNode dealing = nodes.pop();
+    		orders.add(dealing.val);
+    		if (dealing.right != null) {
+    			nodes.push(dealing.right);
+    		}
+    		if (dealing.left != null) {
+    			nodes.push(dealing.left);
+    		}
+    	}
+    	return orders;
+    }
     
     
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		TreeNode root = new TreeNode(1);
+		TreeNode n2 = new TreeNode(2);
+		TreeNode n3 = new TreeNode(3);
+		root.right = n2;
+		n2.left = n3;
+		for (int i : preorderTraversal2(root)){
+			System.out.println(i);
+		}
+		
 	}
 
 }

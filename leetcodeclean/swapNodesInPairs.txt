@@ -1,0 +1,15 @@
+﻿22. Swap Nodes in Pairs
+public ListNode swapPairs(ListNode head) {
+	if(head == null || head.next == null) return head;
+	ListNode dummy = new ListNode(-1);
+	ListNode p = head,tail = dummy;
+	while(p != null && p.next != null){
+		ListNode r = p.next;
+		p.next = r.next;
+		r.next = p;
+		tail.next = r;
+		tail = tail.next.next;
+		p = p.next;
+	}
+	return dummy.next;
+}

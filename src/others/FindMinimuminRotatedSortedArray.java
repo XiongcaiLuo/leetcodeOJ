@@ -1,4 +1,4 @@
-package tails;
+package others;
 /**
  * Suppose a sorted array is rotated at some pivot unknown to you beforehand.
 

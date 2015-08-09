@@ -1,0 +1,18 @@
+﻿
+34. Single Number II
+    public int singleNumber(int[] nums) {
+        int one =0, two =0, zero = -1;        // watch here ! zero = -1;
+		for(int i=0; i<nums.length;i++){
+			int temp = zero & nums[i];
+			
+			zero &= (zero ^ nums[i]);          //形式上高度统一，都是先去掉升级的，再加上升级过来的。
+			zero |=( two & nums[i]);
+
+			two &=(two ^ nums[i]) ;
+			two |= (one & nums[i]);
+			
+			one &=(one ^ nums[i]);
+			one |= temp;
+		}
+		return one;      
+    }	

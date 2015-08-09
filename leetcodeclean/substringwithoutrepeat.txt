@@ -1,0 +1,74 @@
+﻿10. Longest Substring Without Repeating Characters
+
+public int lengthOfLongestSubstring(String s) {
+	if(s ==  null || s.isEmpty()) return 0;
+	else if (s.length() == 1) return 1;
+	
+	HashMap<Character,Integer> cindex = new HashMap<Character,Integer>();
+	int maxLen = 0;
+	for(int i=-1,j=0;j<s.length();j++){
+		Integer in = cindex.get(s.charAt(j));
+		if(in !=null && in > i){
+			i = in;
+		}
+		maxLen = Math.max(maxLen,j-i);
+		cindex.put(s.charAt(j),j);
+	}
+	return maxLen;
+}
+
+10.1. Longest Substring with no more than two repeat Characters
+
+public int lengthOfLongestSubstringTwoDistinct(String s) {
+	if(s ==  null ) return 0;
+	else if (s.length() <3) return s.length();
+	
+	HashMap<Character,Integer> cindex1 = new HashMap<Character,Integer>();
+	HashMap<Character,Integer> cindex2 = new HashMap<Character,Integer>();
+	int maxLen = 0;
+	for(int i=-1,j=0;j<s.length();j++){
+		char c = s.charAt(j);
+		Integer in1 = cindex1.get(c);
+		Integer in2 = cindex2.get(c);
+		if(in1 ==null){
+			cindex1.put(c,j);
+		} else if(in2 == null){
+			cindex2.put(c,j);
+		} else {
+			if(in2 <= i){
+				cindex1.put(c,j);
+				cindex2.remove(c);
+			} else{
+				
+				cindex1.put(c,in2);
+				cindex2.put(c,j);
+				if(in1 >j) i = in2;
+			}
+			
+		}
+		maxLen = Math.max(maxLen,j-i);
+		
+	}
+	return maxLen;
+}
+
+11. Longest Substring with At Most Two Distinct Characters
+
+	public int lengthOfLongestSubstringTwoDistinct(String s) {
+		if(s == null ) return 0;
+		else if (s.length()<3) return s.length();
+		char[] cs  = new char[256];
+		int num = 0, i = 0 ,j = 0,maxLen = 0;
+		for(;j<s.length();j++){
+			char c = s.charAt(j);
+			if (cs[c] ==0) num++;
+			cs[c]++;
+			while(num > 2){
+				cs[s.charAt(i)]--;
+				if(cs[s.charAt(i)] ==0) num--;
+				i++;
+			}
+			maxLen  =  Math.max(maxLen,j-i+1);
+		}
+		return maxLen;
+	}

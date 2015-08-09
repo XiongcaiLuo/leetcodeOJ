@@ -21,7 +21,7 @@ In this case, you should ignore redundant slashes and return "/home/foo".
 	 */
 	public static String simplifyPath(String path) {
 		String newPath="";
-		Stack<String> names = new Stack<>();
+		Stack<String> names =  new Stack<String>();
 		String name="";
 		for(int i=1;i<=path.length();i++){
 			if(i==path.length() || path.charAt(i)=='/' ){
@@ -53,16 +53,61 @@ In this case, you should ignore redundant slashes and return "/home/foo".
         return newPath;
     }
 	
-
+	public  String simplifyPath2(String path) {
+		Stack<Integer> slashIndex = new Stack<Integer>();
+		slashIndex.push(0);
+		StringBuilder sb = new StringBuilder("/");
+		int[][] trans = new int[][]{
+				{0, 1, 0},
+				{3, 1, 2},
+				{0, 1, 2},
+				{4, 1, 0},
+				{0, 1, 0}
+		};
+		char[] chars = path.toCharArray();
+		int state = 1;
+		for (int i = 1; i < chars.length; i++) {
+			int input = map(chars[i]);
+			if (state ==2 && input == 1) {
+				slashIndex.push(i);
+			}
+			if ( (state == 1 && input == 2) || (state == 2 &&(input == 1 || input == 2))) {
+				sb.append(chars[i]);
+			} else if (state == 4 && input == 1) {
+				if (slashIndex.size() == 1) continue;
+				int index2 = slashIndex.pop();
+				int index1 = slashIndex.peek();
+				sb.delete(index1+1, index2+1);
+			}
+			state = trans[state][input];
+			if (state == 0) {
+				return null;
+			}
+		}
+		String re = sb.toString();
+		if (re.endsWith("/")) re = re.substring(0,re.length()-1);
+		return re;
+		
+	}
+	
+	
+	
+	private int map(char c) {
+		if (c == '.') {
+			return 0;
+		} else if (c == '/') {
+			return 1;
+		} else {
+			return 2;
+		}
+	}
 	
 	public static void main(String[] args) {
-		String path="///";
-		System.out.println(simplifyPath(path));
-		Stack<String> names = new Stack<>();
-		names.add("");
-		names.add("");
-		System.out.println(names.size());
-		System.out.println(names.toString());
+		String path="/a/./b/../../c/";
+		SimplifyPath s = new SimplifyPath();
+		String re = s.simplifyPath2(path);
+		System.out.println(re);
+
 	}
 
 }

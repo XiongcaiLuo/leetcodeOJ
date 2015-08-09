@@ -1,0 +1,15 @@
+﻿19. Palindrome Number
+public boolean isPalindrome(int x) {
+	int d = 1;
+	int temp = x/10;
+	while(temp/d !=0) d *=10;
+	while(x/10 !=0){
+		int top = x/d;
+		int ret = x%10;
+		if(top != ret) return false;
+		x= x %d;
+		x = x/10;
+		d /=100;                      // watch for this . It's 100!
+	}
+	return true;
+}

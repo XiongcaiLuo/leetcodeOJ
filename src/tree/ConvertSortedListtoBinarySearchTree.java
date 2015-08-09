@@ -10,7 +10,7 @@ public class ConvertSortedListtoBinarySearchTree {
 	 */
     public TreeNode sortedListToBST(ListNode head) {
         if(head==null) return null;
-        ArrayList<Integer> nums=new ArrayList<>();
+        ArrayList<Integer> nums=new ArrayList<Integer>();
         ListNode ptr=head;
         while(ptr!=null){
         	nums.add(ptr.val);
