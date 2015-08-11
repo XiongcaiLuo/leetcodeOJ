@@ -16,34 +16,20 @@ Given n = 3, there are a total of 5 unique BST's.
 	 * @param args
 	 */
     public static  int numTrees(int n) {
-        int[] nums=new int[n+1];
-        if(n==0) return 0;
-        if(n==1) return 1;
-        nums[0]=1;
-        nums[1]=1;
-        int num=2;
-        while(num<=n){
-        	int sum=0;
-            int ptr=1;
-            while(ptr<=num-ptr){
-            	sum+=2*nums[ptr-1]*nums[num-ptr];
-            	if(ptr==num-ptr)
-            		break;
-            	ptr++;
-            	
-            }
-            if(ptr>num-ptr){
-            	sum+=nums[ptr-1]*nums[ptr-1];
-            }
-            nums[num]=sum;
-            num++;
+        if (n == 1) return 1;
+        int [] nums = new int[n + 1];
+        nums[0] = 1; nums[1] = 1;
+        for (int i = 2; i <= n; i++){
+        	for (int j = 0; j <= i - 1; j++){
+        		nums[i] += nums[j] * nums[i - 1 -j];
+        	}
         }
         return nums[n];
     }
     
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int n=numTrees(5);
+		int n=numTrees(3);
 		System.out.println(n);
 	}
 
