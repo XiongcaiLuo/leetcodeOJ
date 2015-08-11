@@ -2,39 +2,41 @@ package tree;
 
 import java.util.ArrayList;
 
+/**
+ * Given a singly linked list where elements are sorted in ascending order,
+ * convert it to a height balanced BST.
+ */
 public class ConvertSortedListtoBinarySearchTree {
 
+	public TreeNode sortedListToBST(ListNode head) {
+		if (head == null)
+			return null;
+		return sortBST(head, null);
+
+	}
+	
 	/**
-	 * Given a singly linked list where elements are sorted in ascending order, convert it to a height balanced BST.
-	 * @param args
+	 * 利用快慢指针获得中间元素。 时间复杂度o(nlgn)
+	 * @param head
+	 * @param exTail
+	 * @return
 	 */
-    public TreeNode sortedListToBST(ListNode head) {
-        if(head==null) return null;
-        ArrayList<Integer> nums=new ArrayList<Integer>();
-        ListNode ptr=head;
-        while(ptr!=null){
-        	nums.add(ptr.val);
-        	ptr=ptr.next;
-        }
-        return sortedArrayToBST(nums);
-  
-    }
-    public TreeNode sortedArrayToBST(ArrayList<Integer> num) {
-        if(num.size()==0) return null;
-        return build(num,0,num.size()-1); 
-    }
-    public  TreeNode build(ArrayList<Integer> num, int begin,int end){
-    	if(begin>end) return null;
-    	if(begin==end) return new TreeNode(num.get(begin));
-    	int mid=(begin+end)/2;
-    	TreeNode root=new TreeNode(num.get(mid));
-    	TreeNode root_left=build(num,begin,mid-1);
-    	TreeNode root_right=build(num,mid+1,end);
-    	root.left=root_left;
-    	root.right=root_right;
-    	return root;
-    			
-    }
+	private TreeNode sortBST(ListNode head, ListNode exTail){
+		if (head == exTail)
+			return null;
+		ListNode slow =head, fast = head;
+		while (fast.next != exTail && fast.next.next != exTail){
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		TreeNode subRoot = new TreeNode(slow.val);
+		subRoot.left = sortBST(head, slow);
+		subRoot.right = sortBST(slow.next, exTail);
+		return subRoot;
+	}
+
+
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
