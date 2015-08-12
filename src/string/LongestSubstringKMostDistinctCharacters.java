@@ -23,7 +23,7 @@ public class LongestSubstringKMostDistinctCharacters {
 		for(int i = 0, j = 0; i < s.length(); i++){
 			if (count[s.charAt(i)]++ == 0)
 				uniqueNum++;
-			while (uniqueNum > k){
+			while (uniqueNum > k){ 
 				if ( --count[s.charAt(j++)] == 0)
 					uniqueNum--;
 			}

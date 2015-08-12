@@ -1,54 +1,57 @@
-package oj.list;
+package list;
 
-import java.util.List;
+import sort.ListNode;
 
+/**
+ * Given a sorted linked list, delete all nodes that have duplicate numbers,
+ * leaving only distinct numbers from the original list.
+ * 
+ * For example, Given 1->2->3->3->4->4->5, return 1->2->5. Given 1->1->1->2->3,
+ * return 2->3.
+ * 
+ * @author luoxiongcai
+ *
+ */
 public class RemoveDuplicatesfromSortedList2 {
 
 	/**
 	 * @param args
 	 */
-    public static ListNode deleteDuplicates(ListNode head) {
-    	if(head==null || head.next==null) return head;
-    	ListNode dummy=new ListNode(Integer.MAX_VALUE);
-    	dummy.next=head;
-    	ListNode cur=head,rightCur=dummy;
-    	while(cur!=null){
-    		if(cur.next==null){
-    			rightCur.next=cur;
-    			return dummy.next;
-    		}
-    			
-    		if(cur.val!=cur.next.val){
-    			rightCur.next=cur;
-    			rightCur=cur;
-    			cur=cur.next;
-    		}
-    		else{
-    			// find the bound;
-    			int value=cur.val;
-    			while(cur!=null && cur.val==value){
-    				cur=cur.next;
-    			}
-    			if(cur==null){
-    				rightCur.next=null;
-    				return dummy.next;
-    			}
-    			
-    		}
-    	}
-    	
-    	return dummy.next;
-        
-    }
+	public static ListNode deleteDuplicates(ListNode head) {
+		if (head == null || head.next == null)
+			return head;
+		ListNode dummy = new ListNode(Integer.MAX_VALUE);
+		ListNode tail = dummy;
+		ListNode pre = head, cur =head.next;
+		while ( cur != null){
+			if ( cur.val != pre.val){
+				tail.next = pre;
+				tail = tail.next;
+			} else {
+				while (cur != null && pre.val == cur.val) cur =cur.next;
+				if (cur == null) break;
+			}
+			pre =cur;
+			cur = cur.next;
+		}
+		//be careful about the last pre
+		if (pre.next == null){
+			tail.next = pre;
+			tail = tail.next;
+		}
+		tail.next = null;
+		return dummy.next;
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ListNode a1=new ListNode(1);
-		ListNode a2=new ListNode(1);
-		ListNode a3=new ListNode(2);
-//		ListNode a4=new ListNode(2);
-		a1.next=a2;
-		a2.next=a3;
-//		a3.next=a4;
+		ListNode a1 = new ListNode(1);
+		ListNode a2 = new ListNode(1);
+		ListNode a3 = new ListNode(2);
+		// ListNode a4=new ListNode(2);
+		a1.next = a2;
+		a2.next = a3;
+		// a3.next=a4;
 		deleteDuplicates(a1);
 
 	}

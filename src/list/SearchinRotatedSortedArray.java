@@ -1,70 +1,45 @@
-package oj.list;
+package list;
 
+/**
+ * Suppose a sorted array is rotated at some pivot unknown to you beforehand.
+ * 
+ * (i.e., 0 1 2 4 5 6 7 might become 4 5 6 7 0 1 2).
+ * 
+ * You are given a target value to search. If found in the array return its
+ * index, otherwise return -1.
+ * 
+ * You may assume no duplicate exists in the array.
+ * 
+ * @author luoxiongcai
+ *
+ */
 public class SearchinRotatedSortedArray {
 
-	/**
-	 * @param args
-	 */
+	public static int search(int[] nums, int target) {
+		if (nums.length == 0) return -1;
+		int L = 0, R = nums.length - 1;
+		while (L < R){
+			int mid = (L + R) / 2;
+			if (nums[mid] < nums[R]){
+				if (nums[mid] < target && target <= nums[R])
+					L = mid + 1;
+				else R = mid;
+			} else {
+				if (nums[L] <= target && target <=nums[mid])
+					R = mid ;
+				else L = mid + 1;                        //always in mind! never L =mid ! 
+			}
+		}
+		return nums[L] == target ? L : -1; 
+	}
 
-    public static int search(int[] A, int target) {
-        int begin=0,end=A.length-1;
-        while(begin<=end){
-        	int middle=(begin+end)/2;
-        	if(A[middle]==target) return middle;
-        	if(A[begin]<=A[middle]){
-        		if(A[begin]<=target &&target<A[middle])
-        			end=middle-1;
-        		else begin=middle+1;
-        			
-        	}
-        	else{
-        		if(A[middle]<target && target<=A[end])
-        			begin=middle+1;
-        		else end=middle-1;
-        	}
-        }
-        return -1;
-    }
-    
-    public static boolean search2(int[] A, int target) {
-        int begin=0,end=A.length-1;
-        while(begin<=end){
-        	int middle=(begin+end)/2;
-        	if(A[middle]==target ) return true;
-        	
-        	if(A[begin]<A[middle]){
-        		if(A[begin]<=target &&target<A[middle])
-        			end=middle-1;
-        		else begin=middle+1;
-        			
-        	}
-        	else if(A[begin]>A[middle]){
-        		if(A[middle]<target && target<=A[end])
-        			begin=middle+1;
-        		else end=middle-1;
-        	}
-        	else{
-        		boolean flag=meiju(A,begin,end,target);
-        		if(flag) return true;
-        		else{
-        			begin=middle+1;
-        			
-        		}
-        	}
-        }
-        return false;
-    }
-    public static boolean meiju(int[]A,int begin,int end,int target){
-    	for(int i=begin;i<=end;i++){
-    		if(A[i]==target) return true;
-    	}
-    	return false;
-    }
+
+
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		int[] A={1,1,3,1};
-//		System.out.println(search(A,1));
-		System.out.println(search2(A,3));
+		// TODO numsuto-generated method stub
+		int[] nums = { 1, 2, 3, 0 };
+		int index = search(nums,3);
+		System.out.println(index);
 	}
 
 }
