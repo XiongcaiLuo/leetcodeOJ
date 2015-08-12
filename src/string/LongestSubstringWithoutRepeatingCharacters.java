@@ -27,14 +27,14 @@ public class LongestSubstringWithoutRepeatingCharacters {
 				j = index[s.charAt(i)] + 1;
 			}
 			index[s.charAt(i)] = i;
-			max = Math.max(max, i - j);
+			max = Math.max(max, i - j + 1);
 		}
 		return max;
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String s = "bbbb";
+		String s = "bbbwdb";
 		System.out.println(lengthOfLongestSubstring(s));
 	}
 
