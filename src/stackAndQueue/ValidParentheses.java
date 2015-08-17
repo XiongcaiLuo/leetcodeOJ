@@ -16,6 +16,11 @@ public class ValidParentheses {
 
 	public  boolean isValid(String s) {
 		HashMap<Character,Character> maps = new HashMap<Character,Character>(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			{
 				put(']','['); put(')','('); put('}','{');
 			}

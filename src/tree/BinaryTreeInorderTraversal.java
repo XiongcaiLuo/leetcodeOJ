@@ -12,28 +12,18 @@ public class BinaryTreeInorderTraversal {
     public List<Integer> inorderTraversal(TreeNode root) {
     	ArrayList<Integer> orders=new ArrayList<Integer>();
     	if(root==null) return orders;
-    	Stack<TreeNode> parents=new Stack<TreeNode>();
-    	parents.push(root);
-    	TreeNode ptr=null;
-    	while(!parents.isEmpty()){
-    		ptr=parents.peek().left;
-    		if(ptr!=null)
-    			parents.push(ptr);
-    		else{
-    			while(!parents.isEmpty() && parents.peek().right==null){
-    				orders.add(parents.pop().val);
-    			}
-    			if(parents.isEmpty())
-    				break;
-    			else{
-    				orders.add(parents.peek().val);
-    				ptr=parents.pop().right;
-    				parents.push(ptr);
-    			}
+    	Stack<TreeNode> stack=new Stack<TreeNode>();
+    	TreeNode ptr = root;
+    	while ( !stack.isEmpty() || ptr != null){
+    		if (ptr != null){
+    			stack.push(ptr);
+    			ptr = ptr.left;
+    		} else {
+    			ptr = stack.pop();
+    			orders.add(ptr.val);
+    			ptr = ptr.right;
     		}
-
     	}
-    	
     	return orders;
     }
     

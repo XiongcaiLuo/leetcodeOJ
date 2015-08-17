@@ -1,4 +1,4 @@
-package oj;
+package list;
 
 public class ZigZagConversion {
 

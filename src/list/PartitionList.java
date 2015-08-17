@@ -1,12 +1,15 @@
-package oj.list;
 
+package list;
 
+import sort.ListNode;
+
+/**
+ * 采用尾插法。
+ * @param args
+ */
 public class PartitionList {
 
-	/**
-	 * 采用尾插法。
-	 * @param args
-	 */
+
     public static ListNode partition(ListNode head, int x) {
     	ListNode less=new ListNode(-1);
     	ListNode great=new ListNode(-1);

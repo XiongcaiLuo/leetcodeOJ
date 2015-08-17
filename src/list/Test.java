@@ -1,21 +1,17 @@
-package oj;
+package list;
 
-import java.util.HashMap;
+import java.util.LinkedList;
 
-public class Test {
+public class Test extends LinkedList<Integer> {
 
-	/**
-	 * @param args
-	 */
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		 HashMap<Double,Integer > slops=new HashMap();
-		 slops.put(1.01, 1);
-		 slops.put(1.01,2);
-		 System.out.println(slops.size());
-		 slops.put(1.0101, 2);
-		 System.out.println(slops.size());
+		String s ="1+2-3*4=3";
+		String [] tokens = s.split("\\+|\\-|\\*|=");
+		System.out.println(tokens);
 	}
 
 }
