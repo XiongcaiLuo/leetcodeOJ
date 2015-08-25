@@ -12,10 +12,6 @@ import java.util.Queue;
 public class MinimumDepthofBinaryTree {
 
 	public int minDepth(TreeNode root) {
-		//it's not right. for example [1,2], should return 2, but ,here it returns 1;
-//		if (root == null)
-//			return 0;
-//		return Math.min(minDepth(root.left), minDepth(root.right)) + 1;
 		
 		//here is the result;
 //		if (root == null) return 0;

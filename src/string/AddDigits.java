@@ -41,7 +41,16 @@ public class AddDigits {
     	}
     	return sum;
     }
-    
+    /**
+     * 
+     * @param num
+     * @return
+     */
+    public int addDigits2(int num) {
+        if ( num < 10) return num;
+        int mod = num % 9;
+        return mod == 0 ? 9 : mod;
+    }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

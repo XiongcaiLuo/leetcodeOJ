@@ -16,25 +16,25 @@ package search;
 public class FindMinimuminRotatedSortedArray {
 	/**
 	 * 利用二分搜索最小值，最大值，特定值，插入位置。 有重复，没重复。
-	 * @param num
+	 * @param nums
 	 * @return
 	 */
-	public int findMin(int[] num) {
-		int L = 0, R = num.length - 1;
-		while (L < R && num[L] >= num[R]){
+	public int findMin(int[] nums) {
+		int L = 0, R = nums.length - 1;
+		while (L < R && nums[L] >= nums[R]){
 			int mid = (L + R) / 2;
-			if (num[mid] > num[R])
-				L = mid + 1;
-			else R = mid;
+			if (nums[mid] < nums[R])
+				R = mid;
+			else L = mid + 1;
 		}
-		return num[L];
+		return nums[L];
 	}
 	
 	
 	public static void main(String [] args){
 		FindMinimuminRotatedSortedArray fr = new FindMinimuminRotatedSortedArray();
-		int[] num = {6,7,0,1,2,4,5};
-		int min = fr.findMin(num);
+		int[] nums = {6,7,0,1,2,4,5};
+		int min = fr.findMin(nums);
 		System.out.println(min);
 	}
 }

@@ -22,8 +22,6 @@ public class MedianofTwoSortedArrays {
     }
     
     private double findK(int [] nums1, int [] nums2, int k){
-    	if ( nums1.length == 0) return nums2[k-1];
-    	if (nums2.length == 0) return nums1[k-1];
     	return helper(nums1, 0, nums2, 0, k);
     }
     
@@ -32,7 +30,7 @@ public class MedianofTwoSortedArrays {
     	if (b2 == nums2.length) return nums1[b1+k-1];
     	if (k == 1) return Math.min(nums1[b1], nums2[b2]); // here! be careful!
     	if (nums1.length - b1 > nums2.length - b2) return helper(nums2, b2, nums1,b1,k); // be careful about here;
-    	int half1 = Math.min(k / 2, nums1.length - b1);  // be careful about out of range;
+    	int half1 = Math.min(k / 2, nums1.length - b1 );  // be careful about out of range;
     	int half2 = k - half1;
     	if (nums1[b1 + half1 - 1] == nums2[b2 + half2 - 1])
     		return nums1[b1 + half1 - 1];
@@ -43,7 +41,7 @@ public class MedianofTwoSortedArrays {
 	public static void main(String[] args) {
 		MedianofTwoSortedArrays mt = new MedianofTwoSortedArrays();
 		int[] nums1 = {2,3,4};
-		int[] nums2 = {1};
+		int[] nums2 = {1,6};
 		double median = mt.findMedianSortedArrays(nums1, nums2);
 		System.out.println(median);;
 	}

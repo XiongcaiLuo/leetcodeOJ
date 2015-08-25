@@ -25,7 +25,7 @@ If S = [1,2,3], a solution is:
   [1,2],
   []
 ]
-	 * @param args
+	 * @param args:dfs
 	 */
     public List<List<Integer>> subsets(int[] S) {
         ArrayList<List<Integer>> result=new ArrayList<List<Integer>>();
@@ -44,6 +44,32 @@ If S = [1,2,3], a solution is:
     	another.add(S[level]);
     	subsets(S,level+1,another,result);
     }
+    
+    /**
+     * recursion.
+     * @param args
+     */
+    public List<List<Integer>> subsets2(int[] S) {
+    	Arrays.sort(S);
+    	return subsets(S, S.length - 1);
+    }
+    private List<List<Integer>> subsets(int[]S, int index){
+    	List<List<Integer>> result=new ArrayList<List<Integer>>();
+    	if (index == -1 ){
+    		List<Integer> zero = new ArrayList<Integer>();
+    		result.add(zero);
+    		return result;
+    	}
+    	result = subsets(S,index - 1);
+    	int size = result.size();
+    	for (int i = 0; i< size; i++){
+    		List<Integer> plus = new ArrayList<Integer>(result.get(i));
+    		plus.add(S[index]);
+    		result.add(plus);
+    	}
+    	return result;
+    }
+    
     
 	public static void main(String[] args) {
 		System.out.println(1<<3);

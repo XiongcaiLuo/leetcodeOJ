@@ -35,7 +35,7 @@ public class ConstructBinaryTreefromPreorderandInorderTraversal {
 
 	}
 
-	public int getRootIndexInoder(int[] inorder, int begin_index,
+	private  int getRootIndexInoder(int[] inorder, int begin_index,
 			int end_index, int root) {
 		for (int i = begin_index; i <= end_index; i++) {
 			if (inorder[i] == root)

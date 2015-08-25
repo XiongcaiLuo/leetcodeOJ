@@ -27,6 +27,34 @@ public class BinaryTreeInorderTraversal {
     	return orders;
     }
     
+    /**
+     * http://www.cnblogs.com/AnnieKim/archive/2013/06/15/morristraversal.html
+     * morris遍历
+     * @param root
+     * @return
+     */
+    public static List<Integer> inorderTraversal2(TreeNode root) {
+    	ArrayList<Integer> orders=new ArrayList<Integer>();
+    	TreeNode p = root;
+    	while ( p != null){
+    		if (p.left == null){
+    			orders.add(p.val);
+    			p = p.right;
+    		} else{
+    			TreeNode q = p.left;
+    			while (q.right != null && q.right != p) q = q.right;     // be careful  q.right != p
+    			if (q.right == null){
+    				q.right = p;
+    				p = p.left;
+    			} else {
+    				orders.add(p.val);
+    				q.right = null;
+    				p = p.right;
+    			}
+    		}
+    	}
+    	return orders;
+    }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

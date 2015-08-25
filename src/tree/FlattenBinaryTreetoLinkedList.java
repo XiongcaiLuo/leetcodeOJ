@@ -1,36 +1,42 @@
 package tree;
 
-public class FlattenBinaryTreetoLinkedList {
+import java.util.Stack;
 
-	/**
-	 * Given a binary tree, flatten it to a linked list in-place.
+/**
+ * Given a binary tree, flatten it to a linked list in-place.
 
 For example,
 Given
 
-         1
-        / \
-       2   5
-      / \   \
-     3   4   6
+     1
+    / \
+   2   5
+  / \   \
+ 3   4   6
 The flattened tree should look like:
-   1
+1
+\
+ 2
+  \
+   3
     \
-     2
+     4
       \
-       3
+       5
         \
-         4
-          \
-           5
-            \
-             6
+         6
 click to show hints.
 
 Hints:
 If you notice carefully in the flattened tree, each node's right child points to the next node of a pre-order traversal.
-	 * @param args
-	 */
+ * @param args
+ */
+public class FlattenBinaryTreetoLinkedList {
+
+/**
+ * recursion
+ * @param root
+ */
     public static void flatten(TreeNode root) {
         if(root==null) return ;
         flatten(root.left);
@@ -42,6 +48,23 @@ If you notice carefully in the flattened tree, each node's right child points to
         p.right=root.right;
         root.right=root.left;
         root.left=null;
+    }
+    /**
+     * iteration
+     * @param root
+     */
+    public  void flatten2(TreeNode root) {
+    	Stack<TreeNode> s = new Stack<TreeNode>();
+    	while (!s.isEmpty()){
+    		TreeNode cur = s.pop();
+    		if (cur.right != null)
+    			s.push(cur.right);
+    		if (cur.left != null)
+    			s.push(cur.left);
+    		cur.left = null;
+    		if (!s.isEmpty())
+    			cur.right = s.peek();
+    	}
     }
 
 	public static void main(String[] args) {

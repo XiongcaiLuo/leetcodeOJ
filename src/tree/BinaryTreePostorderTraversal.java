@@ -7,26 +7,36 @@ import java.util.Stack;
 public class BinaryTreePostorderTraversal {
 
 	/**
+	 * use a stack. accepted!!! yeah!
+	 * 
 	 * @param args
 	 */
+	public List<Integer> postorderTraversal(TreeNode root) {
+		ArrayList<Integer> orders = new ArrayList<Integer>();
+		TreeNode p = root;
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		while (p != null || !stack.isEmpty()) {
+			if (p != null) {
+				stack.push(p);
+				p = p.left;
+			} else if (stack.peek().right != null) {
+				p = stack.peek().right;
+			} else { // leaf node
+				p = stack.pop();
+				orders.add(p.val);
+				while (!stack.isEmpty() && p == stack.peek().right) { // right leaf node, pop the parent.
+					p = stack.pop();
+					orders.add(p.val);
+				}
+				if (!stack.isEmpty())
+					p = stack.peek().right;
+				else
+					p = null;
+			}
+		}
+		return orders;
+	}
 
-
-    public List<Integer> postorderTraversal(TreeNode root) {
-        ArrayList<Integer> orders=new ArrayList<Integer> ();
-    	if(root==null) return orders;
-         postorder(orders,root);
-    	return orders;     
-    }
-    
-    public void postorder(ArrayList<Integer> orders,TreeNode root){
-        if(root==null)
-            return ;
-        else{
-            postorder(orders,root.left);
-            postorder(orders,root.right);
-            orders.add(root.val);
-        }
-    }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

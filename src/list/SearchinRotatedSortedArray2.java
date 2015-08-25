@@ -20,21 +20,24 @@ public class SearchinRotatedSortedArray2 {
         	int mid = (L + R) / 2;
         	if (nums[mid] == target)
         		return true;
-        	if (nums[L] < nums[mid]){   // 重点是确定递增序列。
-        		if (nums[L] <= target && target <= nums[mid])
-        			R = mid;
-        		else L = mid + 1;
-        	} else if ( nums[L] > nums[mid] ){
+        	if (nums[mid] < nums[R]){
         		if (nums[mid] < target && target <= nums[R])
         			L = mid + 1;
         		else R = mid;
-        	} else L++;                         //skip duplicate
+        	} else if (nums[mid] > nums[R]){
+        		if (nums[L] <= target && target <= nums[mid])
+        			R = mid;
+        		else L = mid + 1;
+        	} else R--;
         }
         return nums[L] == target ? true : false;
     }
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		SearchinRotatedSortedArray2 sa2 = new SearchinRotatedSortedArray2();
+		int[] nums = {1,3};
+		int target = 3;
+		boolean flag = sa2.search(nums, target);
+		System.out.println(flag);
 	}
 
 }

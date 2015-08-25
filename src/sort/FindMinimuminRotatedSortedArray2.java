@@ -23,11 +23,11 @@ public class FindMinimuminRotatedSortedArray2 {
         int L = 0, R = nums.length - 1;
         while (L < R && nums[L] >= nums[R]){
         	int mid = (L + R) / 2;
-        	if (nums[mid] > nums[R]){
-        		L = mid + 1;
-        	} else if (nums[mid] < nums[L]){
+        	if (nums[mid] < nums[R]){
         		R = mid;
-        	} else L = L + 1;   // nums[L] = nums[R] = nums[mid];
+        	} else if (nums[mid] > nums[R]){
+        		L = mid + 1;
+        	} else R--;   // nums[L] = nums[R] = nums[mid];
         }
         return nums[L];
     }

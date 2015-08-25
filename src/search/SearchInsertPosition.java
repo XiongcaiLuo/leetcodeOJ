@@ -34,7 +34,7 @@ public class SearchInsertPosition {
 		return A[left] >= target ? left : left + 1;
 	}
 	/**
-	 * if 
+	 * if duplicate, insert after the last appearence;
 	 * @param A
 	 * @param target
 	 * @return

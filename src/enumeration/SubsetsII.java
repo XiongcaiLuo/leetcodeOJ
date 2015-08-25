@@ -3,11 +3,8 @@ package enumeration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-public class SubsetsII {
-
-	/**
-	 * Given a collection of integers that might contain duplicates, S, return all possible subsets.
+/**
+ * Given a collection of integers that might contain duplicates, S, return all possible subsets.
 
 Note:
 Elements in a subset must be in non-descending order.
@@ -16,15 +13,18 @@ For example,
 If S = [1,2,2], a solution is:
 
 [
-  [2],
-  [1],
-  [1,2,2],
-  [2,2],
-  [1,2],
-  []
+[2],
+[1],
+[1,2,2],
+[2,2],
+[1,2],
+[]
 ]
-	 * @param args
-	 */
+ * @param args
+ */
+public class SubsetsII {
+
+
 
     public List<List<Integer>> subsetsWithDup(int[] S) {
         ArrayList<List<Integer>> result=new ArrayList<List<Integer>>();

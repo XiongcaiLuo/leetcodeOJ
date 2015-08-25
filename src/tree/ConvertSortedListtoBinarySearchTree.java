@@ -35,11 +35,46 @@ public class ConvertSortedListtoBinarySearchTree {
 		return subRoot;
 	}
 
-
+	/**
+	 * bottom-up ： the loop invariant:
+	 * how to explain?
+	 * @param head
+	 * @return
+	 */
+	ListNode head ;
+	public TreeNode sortedListToBST2(ListNode head) {
+		this.head = head;
+		return sort(0,getLen(head) - 1);
+	}
+	/**
+	 * 
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	private TreeNode sort( int start, int end){
+		if (head == null || start > end) return null;
+		int mid = (start + end) / 2;
+		TreeNode leftRoot = sort(start, mid - 1);
+		TreeNode parent = new TreeNode(head.val);
+		parent.left = leftRoot;
+		head = head.next;
+		parent.right = sort( mid + 1, end);
+		return parent;
+		
+	}
+	
+	private int getLen(ListNode head){
+		int count = 0;
+		while (head != null){
+			count++;
+			head = head.next;
+		}
+		return count;
+	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 }

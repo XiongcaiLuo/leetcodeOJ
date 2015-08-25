@@ -23,17 +23,15 @@ Given target = 3, return true.
         if(matrix==null || matrix.length == 0 || matrix[0].length==0) return false;
         int m=matrix.length;
         int n=matrix[0].length;
-        int first=0,last=m*n;
+        int first=0,last=m*n - 1;
         while(first<last){
-        	int mid=first+(last-first)/2;
+        	int mid=(last+first)/2;
         	int value=matrix[mid/n][mid%n];
-        	if(value==target)
-        		return true;
-        	else if(value<target)
-        		first=mid+1;
-        	else last=mid;
+        	if (value < target)
+        		first = mid + 1;
+        	else last = mid;
         }
-        return false;
+        return matrix[first/n][first%n] == target;
     }
     
 

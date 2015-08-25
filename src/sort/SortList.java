@@ -1,15 +1,16 @@
 package sort;
 
+/**
+ * Sort a linked list in O(n log n) time using constant space complexity.
+ * use merge sort.
+ * @param args
+ */
 public class SortList {
 
-	/**
-	 * Sort a linked list in O(n log n) time using constant space complexity.
-	 * @param args
-	 */
     public ListNode sortList(ListNode head) {
         if(head==null || head.next==null) return head;
         ListNode fast=head,slow=head;
-        while(slow.next!=null && fast.next.next!=null){
+        while(fast.next!=null && fast.next.next!=null){
         	fast=fast.next.next;
         	slow=slow.next;
         }
@@ -22,30 +23,22 @@ public class SortList {
     }
     public  ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode dummy=new ListNode(-1);
-        concat(dummy,l1,l2);
+        ListNode tail = dummy;
+        while (l1 != null && l2 != null){
+        	if (l1.val < l2.val){
+        		tail.next = l1;
+        		tail = tail.next;
+        		l1 = l1.next;
+        	} else {
+        		tail.next = l2;
+        		tail = tail.next;
+        		l2 = l2.next;
+        	}
+        }
+        tail.next = l1 == null ? l2 : l1;
         return dummy.next;
     }
-    private void concat(ListNode tail,ListNode root1,ListNode root2){
-    	if(root1==null){
-    		tail.next=root2;
-    	}else if( root2==null){
-    		tail.next=root1;
-    	}else{
-    		if(root1.val<=root2.val){
-    			ListNode next1=root1.next;
-    			tail.next=root1;
-    			root1.next=null;
-    			tail=root1;
-    			concat(tail,next1,root2);
-    		}else{
-    			ListNode next2=root2.next;
-    			tail.next=root2;
-    			root2.next=null;
-    			tail=root2;
-    			concat(tail,root1,next2);
-    		}
-    	}
-    }
+
 	public static void main(String[] args) {
 		SortList t=new SortList();
 		ListNode n1=new ListNode(1);
