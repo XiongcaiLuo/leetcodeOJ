@@ -2,11 +2,8 @@ package dfs;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class NQueens {
-
-	/**
-	 * The n-queens puzzle is the problem of placing n queens on an n��n chessboard such that no two queens attack each other.
+/**
+ * The n-queens puzzle is the problem of placing n queens on an n��n chessboard such that no two queens attack each other.
 
 
 
@@ -18,18 +15,21 @@ For example,
 There exist two distinct solutions to the 4-queens puzzle:
 
 [
- [".Q..",  // Solution 1
-  "...Q",
-  "Q...",
-  "..Q."],
+[".Q..",  // Solution 1
+"...Q",
+"Q...",
+"..Q."],
 
- ["..Q.",  // Solution 2
-  "Q...",
-  "...Q",
-  ".Q.."]
+["..Q.",  // Solution 2
+"Q...",
+"...Q",
+".Q.."]
 ]
-	 * @param args
-	 */
+ * @param args
+ */
+public class NQueens {
+
+
 	List<String[]> results=new ArrayList<String[]>();
 
 	public List<String[]> solveNQueens(int n) {
@@ -47,9 +47,9 @@ There exist two distinct solutions to the 4-queens puzzle:
 		}
 		for(int col=1;col<=n;col++){
 			if(isValid(pos,level,col)){
-				ArrayList<Integer> next=new ArrayList<Integer>(pos);
-				next.add(col);
-				dfs(next, level+1, n);
+				pos.add(col);
+				dfs(pos, level+1, n);
+				pos.remove(pos.size()-1);
 			}
 		}
 		
@@ -80,6 +80,8 @@ There exist two distinct solutions to the 4-queens puzzle:
 		}
 		return result;
 	}
+	
+	
 	
 
 	public static void main(String[] args) {

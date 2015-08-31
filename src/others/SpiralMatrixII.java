@@ -2,23 +2,21 @@ package others;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class SpiralMatrixII {
-
-	/**
-	 * Given an integer n, generate a square matrix filled with elements from 1 to n2 in spiral order.
+/**
+ * Given an integer n, generate a square matrix filled with elements from 1 to n2 in spiral order.
 
 For example,
 Given n = 3,
 
 You should return the following matrix:
 [
- [ 1, 2, 3 ],
- [ 8, 9, 4 ],
- [ 7, 6, 5 ]
+[ 1, 2, 3 ],
+[ 8, 9, 4 ],
+[ 7, 6, 5 ]
 ]
-	 * @param args
-	 */
+ * @param args
+ */
+public class SpiralMatrixII {
 	
     public int[][] generateMatrix(int n2) {
     	if(n2==0) return new int[0][0];

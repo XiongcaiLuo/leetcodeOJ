@@ -47,7 +47,7 @@ public class CloneGraph {
         HashMap<UndirectedGraphNode,UndirectedGraphNode> copy= new HashMap<UndirectedGraphNode,UndirectedGraphNode>();
         copy.put(node, new UndirectedGraphNode(node.label));
         queue.offer(node);
-        while(!queue.isEmpty()){
+        while(!queue.isEmpty()){ 
         	UndirectedGraphNode curOld= queue.poll();
         	UndirectedGraphNode curNew=copy.get(curOld);
         	for(UndirectedGraphNode nei:curOld.neighbors){

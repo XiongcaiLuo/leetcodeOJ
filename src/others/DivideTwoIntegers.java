@@ -1,53 +1,37 @@
 package others;
 
+/**
+ * Divide two integers without using multiplication, division and mod operator.
+ * 
+ * If it is overflow, return MAX_INT
+ * 
+ * @param args
+ */
 public class DivideTwoIntegers {
 
-	/**Divide two integers without using multiplication, division and mod operator.
+	public int divide(int dividend, int divisor) {
+		if (dividend == Integer.MIN_VALUE && divisor == -1)
+			return Integer.MAX_VALUE;
+		boolean isNeg = ((dividend ^ divisor) >>> 31 == 1) ? true : false;
+		long result = 0;
+		long a = dividend, b  = divisor;
+		a =  a < 0 ? -a : a;
+		b =  b < 0 ? -b : b;
+		while (a >= b){
+			long c = b;
+			for (int i = 0; c <=a ; c <<= 1, i++){
+				a -= c ;
+				result += 1 << i;
+			}
+		}
+		return (int) (isNeg ? -result : result);
+	}
 
-If it is overflow, return MAX_INT
-	 * @param args
-	 */
-    public int divide(int dividend, int divisor) {
-    	 if(divisor==0)
-    	        return Integer.MAX_VALUE;
-    	    
-    	    int res = 0;
-    	    if(dividend==Integer.MIN_VALUE)
-    	    {
-    	        res = 1;
-    	        dividend += Math.abs(divisor);
-    	    }
-    	    if(divisor==Integer.MIN_VALUE)
-    	        return res;
-    	    boolean isNeg = ((dividend^divisor)>>>31==1)?true:false;
-    	    dividend = Math.abs(dividend);
-    	    divisor = Math.abs(divisor);
-    	    int digit = 0;
-    	    while(divisor<=(dividend>>1))
-    	    {
-    	        divisor <<= 1;
-    	        digit++;
-    	    }
-    	    while(digit>=0)
-    	    {
-    	        if(dividend>=divisor)
-    	        {
-    	            dividend -= divisor;
-    	            res += 1<<digit;
-    	        }
-    	        divisor >>= 1;
-    	        digit--;
-    	    }
-    	    return isNeg?-res:res;
-    }
-    
-
-    
 	public static void main(String[] args) {
-		DivideTwoIntegers t=new DivideTwoIntegers();
-		int a=0,b=1;
-		int c=t.divide(a, b);
-		
+		DivideTwoIntegers t = new DivideTwoIntegers();
+		int a = 1, b = 2;
+		int c = t.divide(a, b);
+
 		System.out.println(c);
 	}
 

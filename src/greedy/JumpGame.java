@@ -16,10 +16,10 @@ A = [3,2,1,0,4], return false.
 	 * @param args
 	 */
     public boolean canJump(int[] A) {
-    	int reach = 1; 
-    	for (int i = 0; i < reach && reach < A.length; ++i)
-    		reach = Math.max(reach, i + 1 + A[i]);
-    	return reach >= A.length;
+    	int reach = 0; 
+    	for (int i = 0; i <= reach && reach < A.length - 1; ++i)
+    		reach = Math.max(reach, i + A[i]);
+    	return reach >= A.length - 1;
     }
 
 	public static void main(String[] args) {

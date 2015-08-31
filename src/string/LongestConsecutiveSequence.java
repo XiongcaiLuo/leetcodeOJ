@@ -18,34 +18,6 @@ import java.util.Set;
  */
 public class LongestConsecutiveSequence {
 
-//	public static int longestConsecutive(int[] num) {
-//		if (num == null)
-//			return 0;
-//		if (num.length <= 1)
-//			return num.length;
-//		HashMap<Integer, Boolean> numMap = new HashMap<Integer, Boolean>();
-//		for (int i : num) {
-//			numMap.put(i, false);
-//		}
-//		int maxLen = 0;
-//
-//		for (int k : num) {
-//			if (numMap.get(k))
-//				continue;
-//			int len = 1;
-//			for (int j = k + 1; numMap.containsKey(j); j++) {
-//				len++;
-//				numMap.put(j, true);
-//			}
-//			for (int j = k - 1; numMap.containsKey(j); j--) {
-//				len++;
-//				numMap.put(j, true);
-//			}
-//			maxLen = Math.max(len, maxLen);
-//		}
-//
-//		return maxLen;
-//	}
 
     public static int longestConsecutive2(int[] nums) {
         if (nums.length < 2) return nums.length;
