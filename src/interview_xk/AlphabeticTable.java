@@ -1,4 +1,7 @@
-package interviewquestions.facebook;
+package interview_xk;
+
+
+//package interviewquestions.facebook;
 
 /**
  * Given a mapping of alphabets to integers as follows:
@@ -19,14 +22,20 @@ public class AlphabeticTable {
         for (int i = len - 1; i >= 0; i--) {
             if (src.charAt(i) == '0')
                 continue;
-
             comb[i] = comb[i + 1];
             if (i < len - 1) {
                 int num = Integer.parseInt(src.substring(i, i + 2));
                 if (num > 0 && num < 27)
-                    comb[i] += Math.max(i, comb[i + 2]);
+                    comb[i] += Math.max(i, comb[i + 2]); // wrong?!
             }
         }
         return comb[0];
+    }
+    
+    public static void main(String[] args){
+    	AlphabeticTable ag = new AlphabeticTable();
+    	String src = "1310";
+    	int re = ag.combinations(src);
+    	System.out.println(re);
     }
 }

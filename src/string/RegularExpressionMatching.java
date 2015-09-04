@@ -1,4 +1,4 @@
-package list;
+package string;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,48 +21,7 @@ import java.util.regex.Pattern;
  *
  */
 public class RegularExpressionMatching {
-	/**
-	 * wild char . *
-	 * 
-	 * @param s
-	 * @param p
-	 * @return
-	 */
-	public boolean isMatch(String s, String p) {
-		return helper(s.toCharArray(), 0, p.toCharArray(), 0);
-	}
 
-	private boolean helper(char[] cs, int begin1, char[] cp, int begin2) {
-
-		if (begin1 == cs.length && begin2 == cp.length)
-			return true;
-		if (begin1 != cs.length &&begin2 == cp.length)
-			return false;
-		if (begin1 == cs.length && begin2 != cp.length){
-			int len = cp.length - begin2;
-			if (len % 2 == 1) return false;
-			for (int i = begin2 + 1; i < cp.length; i+=2)
-				if (cp[i] !='*')
-					return false;
-			return true;
-		}
-		int i = begin1, j = begin2;
-		if ((j + 1 < cp.length && cp[j + 1] != '*') || j == cp.length - 1) {
-			if ( cs[i] == cp[j] || cp[j] == '.') 
-				return helper(cs,i+1, cp, j+1);
-			else return false;
-		} else if (j + 1 < cp.length && cp[j + 1] == '*') {
-			if (helper(cs, i, cp, j + 2))
-				return true;
-			while (i < cs.length && (cs[i] == cp[j] || (cp[j] == '.' ))) {
-				if (helper(cs, i + 1, cp, j + 2))
-					return true;
-				i++;
-			}
-			return false;
-		}
-		return false;
-	}
 
 	/**
 	 * wild char .(only match the same character) * +
@@ -110,11 +69,40 @@ public class RegularExpressionMatching {
 		return false;
 	}
 	
+	/**
+	 * good.
+	 * @param s
+	 * @param p
+	 * @return
+	 */
+	public boolean isMatch3(String s, String p){
+		return match3(s, 0, p, 0);
+	}
+	private boolean match3(String s, int si, String p, int pi){
+		if (pi == p.length()) return si == s.length();
+		if (charAt(p, pi + 1) != '*'){
+			return ( charAt(s, si) == charAt(p, pi) ||( charAt(p, pi) == '.' && si < s.length()))
+					&& match3(s, si + 1, p, pi + 1 );
+		}
+		if (match3(s,si, p , pi + 2)) return true;
+		while ( charAt(s,si) == charAt(p, pi) || (charAt(p, pi) == '.' && si < s.length())){
+			if (match3(s,++si, p, pi + 2))
+				return true;
+		}
+		return false;	
+	}
 
+	private int charAt(String s, int i){
+		if ( i >= s.length()) return -1;
+		else return (int) s.charAt(i);
+	}
+
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		RegularExpressionMatching re = new RegularExpressionMatching();
-		boolean result = re.isMatch2("ccc", ".+");
+		boolean result = re.isMatch3("ac", "a*c");
 		System.out.println(result);
 	}
 

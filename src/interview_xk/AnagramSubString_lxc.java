@@ -10,7 +10,7 @@ import java.util.Arrays;
  * sub-string of string b. For eg: if a = xyz and b = afdgzyxksldfm then the
  * program should return true.
  */
-public class AnagramSubString {
+public class AnagramSubString_lxc {
     public boolean isAnagramSubString(String src, String target) {
         if (src == null || target == null || src.length() < target.length())
             return false;
@@ -20,27 +20,24 @@ public class AnagramSubString {
         int[] found = new int[256];
         for (int i = 0; i < target.length(); i++)
             expected[target.charAt(i)]++;
-
         for (int i = 0; i <= src.length() - target.length(); i++) {
-            for (int j = 0; j < target.length(); j++) {
-                found[src.charAt(i + j)]++;
-                if (found[src.charAt(i + j)] > expected[src.charAt(i + j)])
-                    break;
-                /** If not break until end, return true */
-                if (j == target.length() - 1)
-                    return true;
+            for (int j = 0; j <= target.length(); j++) {
+                if ( j == target.length()) return true;
+                found[src.charAt(i+j)]++;
+                if (found[src.charAt(i+j)] > expected[src.charAt(i+j)]){
+                	Arrays.fill(found, 0);
+                	break;
+                }
             }
-            /** Clean up found record every time i increase */
-            Arrays.fill(found, 0);
         }
         return false;
     }
     
-    public static void main(String[] args){
- 	   AnagramSubString lxc = new AnagramSubString();
- 	   String src ="abdcd";
- 	   String target = "bc";
- 	   boolean flag = lxc.isAnagramSubString(src, target);
- 	   System.out.println(flag);
-    }
+   public static void main(String[] args){
+	   AnagramSubString_lxc lxc = new AnagramSubString_lxc();
+	   String src ="abdcd";
+	   String target = "bdc";
+	   boolean flag = lxc.isAnagramSubString(src, target);
+	   System.out.println(flag);
+   } 
 }

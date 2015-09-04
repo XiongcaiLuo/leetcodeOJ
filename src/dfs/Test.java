@@ -1,6 +1,7 @@
 package dfs;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -10,14 +11,26 @@ import java.util.Map.Entry;
 public class Test {
 
 
+
 	public static void main(String[] args)  {
-		List<List<Integer>> lists = new ArrayList<List<Integer>>();
-		List<Integer> a = new ArrayList<Integer>();
-		a.add(1);a.add(2);
-		lists.add(a);
-		List<Integer> b = new ArrayList<Integer>();
-		b.add(2);b.add(1);
-		System.out.println(lists.contains(b));
+		BitSet bs = BitSet.valueOf(new long[]{(26+256)});
+		int preSet = bs.previousSetBit(0);
+		int nextSet = bs.nextSetBit(0);
+		int preC = bs.previousClearBit(1);
+		int nextC = bs.nextClearBit(1);
+		byte[] bytes = bs.toByteArray();
+		long[] longs = bs.toLongArray();
+		String str = bs.toString();
+		System.out.println(str);
+		
+		BitSet bs2 = BitSet.valueOf(new long[]{(6)});
+		boolean inter = bs.intersects(bs2);
+//		bs.and(bs2);
+//		bs.or(bs2);
+//		bs.xor(bs2);
+		bs.andNot(bs2);
+		System.out.println(bs.toString());
+		
 	}
 
 }

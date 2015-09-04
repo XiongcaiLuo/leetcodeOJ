@@ -1,4 +1,5 @@
 package algs4;
+
 /***********************************************************************************
  *  Compilation: javac LSD.java
  *  Execution:   java LSD < input.txt
@@ -85,8 +86,8 @@ public class LSD {
 
             // for most significant byte, 0x80-0xFF comes before 0x00-0x7F
             if (d == W-1) {
-                int shift1 = count[R] - count[R/2];
-                int shift2 = count[R/2];
+                int shift1 = count[R] - count[R/2]; //negative numbers.
+                int shift2 = count[R/2];            // positive numbers.
                 for (int r = 0; r < R/2; r++)
                     count[r] += shift1;
                 for (int r = R/2; r < R; r++)
@@ -106,19 +107,10 @@ public class LSD {
     }
 
     public static void main(String[] args) {
-        String[] a = StdIn.readAllStrings();
-        int N = a.length;
-
-        // check that strings have fixed length
-        int W = a[0].length();
-        for (int i = 0; i < N; i++)
-            assert a[i].length() == W : "Strings must have fixed length";
-
-        // sort the strings
-        sort(a, W);
-
-        // print results
-        for (int i = 0; i < N; i++)
-            StdOut.println(a[i]);
+		LSD  lsd = new LSD();
+		int[] nums = {-3,2,6,-1,-10,8,9};
+		lsd.sort(nums);
+		for (int n : nums)
+			System.out.print(n+" ");
     }
 }

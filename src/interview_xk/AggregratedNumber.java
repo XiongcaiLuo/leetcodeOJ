@@ -1,4 +1,5 @@
-package interviewquestions.google;
+package interview_xk;
+//package interviewquestions.google;
 
 import java.util.*;
 
@@ -14,7 +15,7 @@ import java.util.*;
  * can you provide a function to check whether this number is aggregated number
  * or not?
  */
-public class AggregratedNumber {
+public class AggregratedNumber { 
     public boolean isAggregratedNumber(String num) {
         if (num == null || num.length() < 3)
             return false;

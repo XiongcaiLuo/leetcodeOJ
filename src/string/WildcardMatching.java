@@ -54,6 +54,9 @@ public class WildcardMatching {
     }
     /**
      * iterative method.
+     * examples: a?b**c*
+     * : '*' match any consequtive characters.
+     * : '?' match any single character.
      * @param s
      * @param p
      * @return
@@ -73,7 +76,7 @@ public class WildcardMatching {
 				pstar = ptr;
 				ptr++;
 			} else if (pstar != -1){
-				str = spos++;
+				str = ++spos;
 				ptr = pstar + 1;
 			} else return false;
 		}
@@ -97,16 +100,13 @@ public class WildcardMatching {
 				continue;
 			}
 			if (ptr < n && p.charAt(ptr) =='*'){
-				posStar = ptr;
+				posStar = ptr++;
 				posS = str;
-				ptr++;
 			} else if (ptr < n && p.charAt(ptr) == '+'){
-				posStar = ptr;
-				posS = str;
-				str++;
-				ptr++;
+				posStar = ptr++;
+				posS = str++;
 			} else if (posStar > -1){
-				str = posS++;
+				str = ++posS;
 				ptr = posStar + 1;
 			} else return false;
 		}
@@ -116,10 +116,16 @@ public class WildcardMatching {
 
 	public static void main(String[] args) {
 		WildcardMatching wm = new WildcardMatching();
-		String s= "hi";
-		String p = "*?+";
+		String s= "ihih";
+		String p = "*i+";
 		boolean f = wm.isMatch3(s, p);
 		System.out.println(f);
+	}
+	public class Node{
+
+
+		public final String flag =" ";
+
 	}
 
 }

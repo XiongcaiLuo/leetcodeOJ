@@ -1,6 +1,5 @@
 package interview_xk;
 
-
 //package interviewquestions.facebook;
 
 import java.util.*;

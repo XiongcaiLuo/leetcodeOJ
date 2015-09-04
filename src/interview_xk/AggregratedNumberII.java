@@ -1,4 +1,7 @@
-package interviewquestions.google;
+package interview_xk;
+
+
+//package interviewquestions.google;
 
 /**
  * we will name a number "aggregated number" if this number has the following
@@ -12,7 +15,7 @@ package interviewquestions.google;
  * can you provide a function to check whether this number is aggregated number
  * or not?
  */
-public class AggregrateNumberII {
+public class AggregratedNumberII {
     public boolean isAggregrateNumber(String num) {
         for (int i = 1; i < num.length() - 1; i++) {
             for (int j = i + 1; j < num.length(); j++) {

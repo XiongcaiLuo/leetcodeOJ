@@ -1,4 +1,7 @@
-package interviewquestions.other;
+package interview_xk;
+
+
+//package interviewquestions.other;
 
 import java.util.Arrays;
 
@@ -25,7 +28,7 @@ public class BinaryMaxHeap<T extends Comparable<T>> {
         if (startCapacity <= 0)
             throw new IllegalArgumentException(
                     "Error: Start Capacity must be positive.");
-        data = (T[]) (new Comparable[startCapacity]);
+        data = (T[]) (new Comparable[startCapacity ]); // + 1?
         this.size = 0;
     }
 

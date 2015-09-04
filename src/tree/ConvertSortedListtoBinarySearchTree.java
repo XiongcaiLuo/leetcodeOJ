@@ -37,6 +37,7 @@ public class ConvertSortedListtoBinarySearchTree {
 
 	/**
 	 * bottom-up ： the loop invariant:
+	 * 
 	 * how to explain?
 	 * @param head
 	 * @return
@@ -44,7 +45,8 @@ public class ConvertSortedListtoBinarySearchTree {
 	ListNode head ;
 	public TreeNode sortedListToBST2(ListNode head) {
 		this.head = head;
-		return sort(0,getLen(head) - 1);
+		int len = getLen(head);
+		return sort(0,len - 1);
 	}
 	/**
 	 * 
@@ -74,7 +76,14 @@ public class ConvertSortedListtoBinarySearchTree {
 	}
 
 	public static void main(String[] args) {
-		
+		ListNode n0 = new ListNode(0);
+		ListNode n1 = new ListNode(1);
+		ListNode n2 = new ListNode(2);
+		n0.next = n1;
+		n1.next = n2;
+		ConvertSortedListtoBinarySearchTree cbs = new ConvertSortedListtoBinarySearchTree();
+		TreeNode root = cbs.sortedListToBST2(n0);
+		System.out.println(root);
 	}
 
 }
