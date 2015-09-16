@@ -117,15 +117,9 @@ public class WildcardMatching {
 	public static void main(String[] args) {
 		WildcardMatching wm = new WildcardMatching();
 		String s= "ihih";
-		String p = "*i+";
+		String p = "i+";
 		boolean f = wm.isMatch3(s, p);
 		System.out.println(f);
-	}
-	public class Node{
-
-
-		public final String flag =" ";
-
 	}
 
 }

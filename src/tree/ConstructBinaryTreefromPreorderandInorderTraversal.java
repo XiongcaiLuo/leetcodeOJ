@@ -1,20 +1,29 @@
 package tree;
 
-public class ConstructBinaryTreefromPreorderandInorderTraversal {
+import java.util.HashMap;
+import java.util.Map;
 
-	/**
-	 * Given preorder and inorder traversal of a tree, construct the binary
-	 * tree.
-	 * 
-	 * Note: You may assume that duplicates do not exist in the tree.
-	 * 
-	 * @param args
-	 */
+/**
+ * Given preorder and inorder traversal of a tree, construct the binary tree.
+ * 
+ * Note: You may assume that duplicates do not exist in the tree.
+ * 
+ * @param args
+ */
+public class ConstructBinaryTreefromPreorderandInorderTraversal {
+	private Map<Integer, Integer> inorderIndex = new HashMap<Integer, Integer>();
 	public TreeNode buildTree(int[] preorder, int[] inorder) {
 		if (preorder.length == 0)
 			return null;
+		getIndex(inorder);
 		return build(preorder, 0, preorder.length - 1, inorder, 0,
 				inorder.length - 1);
+	}
+
+	private void getIndex(int[] inorder) {
+		for (int i = 0; i < inorder.length; i++) {
+			inorderIndex.put(inorder[i], i);
+		}
 	}
 
 	public TreeNode build(int[] preorder, int begin_pre, int end_pre,
@@ -24,29 +33,24 @@ public class ConstructBinaryTreefromPreorderandInorderTraversal {
 		if ((begin_pre == end_pre) && (begin_in == end_in))
 			return new TreeNode(preorder[begin_pre]);
 		TreeNode root = new TreeNode(preorder[begin_pre]);
-		int rootIndex = getRootIndexInoder(inorder, begin_in, end_in, root.val);
-		TreeNode leftRoot = build(preorder, begin_pre + 1, begin_pre
-				+ rootIndex, inorder, begin_in, begin_in + rootIndex - 1);
-		TreeNode rightRoot = build(preorder, begin_pre + rootIndex + 1,
-				end_pre, inorder, begin_in + rootIndex + 1, end_in);
+		int rootIndex = inorderIndex.get(root.val);
+		int offset = rootIndex - begin_in;
+		TreeNode leftRoot = build(preorder, begin_pre + 1, begin_pre + offset,
+				inorder, begin_in, rootIndex - 1);
+		TreeNode rightRoot = build(preorder, begin_pre + offset + 1, end_pre,
+				inorder, rootIndex + 1, end_in);
 		root.left = leftRoot;
 		root.right = rightRoot;
 		return root;
 
 	}
 
-	private  int getRootIndexInoder(int[] inorder, int begin_index,
-			int end_index, int root) {
-		for (int i = begin_index; i <= end_index; i++) {
-			if (inorder[i] == root)
-				return i - begin_index;
-		}
-		return -1;
-	}
-
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		ConstructBinaryTreefromPreorderandInorderTraversal cp = new ConstructBinaryTreefromPreorderandInorderTraversal();
+		int[] preorder = { 1, 2 };
+		int[] inorder = { 2, 1 };
+		TreeNode root = cp.buildTree(preorder, inorder);
+		System.out.println(root);
 	}
 
 }

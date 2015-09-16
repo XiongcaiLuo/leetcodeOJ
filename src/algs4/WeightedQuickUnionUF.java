@@ -61,8 +61,11 @@ public class WeightedQuickUnionUF {
      * @throws java.lang.IndexOutOfBoundsException unless 0 <= p < N
      */
     public int find(int p) {
-        while (p != id[p])
-            p = id[p];
+        while (p != id[p]){
+        	 id[p] = id[id[p]];   // compress!
+        	 p = id[p];
+        }
+           
         return p;
     }
 

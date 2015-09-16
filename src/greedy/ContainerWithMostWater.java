@@ -13,9 +13,6 @@ package greedy;
  */
 public class ContainerWithMostWater {
 
-	/**
-	 * @param args
-	 */
 	public int maxArea(int[] height) {
 		int start = 0;
 		int end = height.length - 1;

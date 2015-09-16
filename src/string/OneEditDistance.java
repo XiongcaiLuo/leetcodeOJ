@@ -23,7 +23,7 @@ public class OneEditDistance {
 			if (s.charAt(i) != t.charAt(i))
 				return s.substring(i).equals(t.substring(i + 1));
 		}
-		return true;
+		return true; 
 	}
 	public static void main(String[] args) {
 		OneEditDistance oed = new OneEditDistance();

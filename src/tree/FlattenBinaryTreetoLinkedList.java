@@ -50,6 +50,22 @@ public class FlattenBinaryTreetoLinkedList {
         root.left=null;
     }
     /**
+     * another recursion.
+     * @param root
+     */
+//    public TreeNode flatten3(TreeNode root) {
+//    	if (root == null) return null;
+//    	TreeNode leftTail = flatten3(root.left);
+//    	TreeNode rightTail = flatten3(root.right);
+//    	if (leftTail == null){
+//    		return rightTail == null ? root : rightTail;
+//    	} else {
+//    		leftTail.right = root.right;
+//    		root.right = root.left;
+//    		return rightTail == null ? leftTail : rightTail;
+//    	}
+//    } 
+    /**
      * iteration
      * @param root
      */

@@ -144,7 +144,7 @@ public class FlowEdge {
      */
     public double residualCapacityTo(int vertex) {
         if      (vertex == v) return flow;              // backward edge
-        else if (vertex == w) return capacity - flow;   // forward edge
+        else if (vertex == w) return capacity - flow;     // forward edge
         else throw new IllegalArgumentException("Illegal endpoint");
     }
 

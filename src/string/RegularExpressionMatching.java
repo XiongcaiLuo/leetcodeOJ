@@ -92,6 +92,59 @@ public class RegularExpressionMatching {
 		return false;	
 	}
 
+	/**
+	 * what if ".+*"?
+	 * @param s
+	 * @param p
+	 * @return
+	 */
+	public boolean isMatch4(String s, String p){
+		return match4(s, 0, p, 0);
+	}
+	private boolean match4(String s, int si, String p, int pi){
+		if (pi == p.length()) return si == s.length();
+		if (charAt(p, pi + 1) != '*' && charAt(p, pi + 1) != '+'){
+			return ( charAt(s, si) == charAt(p, pi) ||( charAt(p, pi) == '.' && si < s.length()))
+					&& match4(s, si + 1, p, pi + 1 );
+		}
+		if (charAt(p, pi + 1) == '*' && match4(s,si, p , pi + 2)) return true;
+		else if (charAt(p, pi + 1) == '*' || charAt(p, pi + 1) == '+') {
+			while ( charAt(s,si) == charAt(p, pi) || (charAt(p, pi) == '.' && si < s.length())){
+				if (match4(s,++si, p, pi + 2))
+					return true;
+			}
+		}
+		return false;
+
+	}
+	
+	
+	/**
+	 * what if ".+*"? and '.' must match the same character.
+	 * @param s
+	 * @param p
+	 * @return
+	 */
+	public boolean isMatch5(String s, String p){
+		return match5(s, 0, p, 0);
+	}
+	private boolean match5(String s, int si, String p, int pi){
+		if (pi == p.length()) return si == s.length();
+		if (charAt(p, pi + 1) != '*' && charAt(p, pi + 1) != '+'){
+			return ( charAt(s, si) == charAt(p, pi) ||( charAt(p, pi) == '.' && si < s.length()))
+					&& match5(s, si + 1, p, pi + 1 );
+		}
+		if (charAt(p, pi + 1) == '*' && match5(s,si, p , pi + 2)) return true;
+		else if (charAt(p, pi + 1) == '*' || charAt(p, pi + 1) == '+') {
+			int flagChar = charAt(s,si);
+			while ( (flagChar == charAt(s, si))&&(charAt(s,si) == charAt(p, pi) || (charAt(p, pi) == '.' && si < s.length()))){
+				if (match5(s,++si, p, pi + 2))
+					return true;
+			}
+		}
+		return false;
+
+	}
 	private int charAt(String s, int i){
 		if ( i >= s.length()) return -1;
 		else return (int) s.charAt(i);
@@ -102,7 +155,7 @@ public class RegularExpressionMatching {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		RegularExpressionMatching re = new RegularExpressionMatching();
-		boolean result = re.isMatch3("ac", "a*c");
+		boolean result = re.isMatch5("abbc", ".*c");
 		System.out.println(result);
 	}
 

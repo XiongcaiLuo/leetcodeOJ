@@ -7,7 +7,7 @@ import java.util.Stack;
 public class BinaryTreePostorderTraversal {
 
 	/**
-	 * use a stack. accepted!!! yeah!
+	 * use a stack. accepted
 	 * 
 	 * @param args
 	 */
@@ -35,6 +35,32 @@ public class BinaryTreePostorderTraversal {
 			}
 		}
 		return orders;
+	}
+	
+	public int height(TreeNode root){
+		if (root == null) return -1;
+		TreeNode p = root;
+		int height = 0;
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		while (p != null || !stack.isEmpty()) {
+			if (p != null) {
+				stack.push(p);
+				p = p.left;
+			} else if (stack.peek().right != null) {
+				p = stack.peek().right;
+			} else { // leaf node
+				height = Math.max(stack.size()-1, height);
+				p = stack.pop();
+				while (!stack.isEmpty() && p == stack.peek().right) { // right leaf node, pop the parent.
+					p = stack.pop();
+				}
+				if (!stack.isEmpty())
+					p = stack.peek().right;
+				else
+					p = null;
+			}
+		}
+		return height;
 	}
 
 	public static void main(String[] args) {

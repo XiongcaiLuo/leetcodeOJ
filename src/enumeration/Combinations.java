@@ -25,27 +25,20 @@ If n = 4 and k = 2, a solution is:
     	ArrayList<List<Integer>> result=new ArrayList<List<Integer>>();
         if(n<1||k>n)  return result;
         ArrayList<Integer> temp=new ArrayList<Integer>();
-        dfs(result,temp,0,n,k);
+        dfs(result,temp,1,n,k);
         return result;
     }
     
     private void dfs(ArrayList<List<Integer>> result,ArrayList<Integer> temp,int level,int n,int k){
-    	if(level == n){
-    		if(temp.size()==k){
-    			result.add(temp);
-    			return;
-    		}
-    		else return;
-    	}
-    	if(temp.size()==k){
-    		result.add(temp);
+    	if (temp.size() == k){
+    		result.add(new ArrayList<Integer>(temp));
     		return;
-    	}else{
-    		ArrayList<Integer> other=new ArrayList<Integer>(temp);
-    		other.add(level);
-    		dfs(result,temp,level+1,n,k);
-    		dfs(result,other,level+1,n,k);
     	}
+    	if (level > n) return;
+		temp.add(level);
+		dfs(result,temp,level+1,n,k);
+		temp.remove(temp.size() - 1);
+		dfs(result,temp,level+1,n,k);
     		
     }
     

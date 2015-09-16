@@ -103,6 +103,41 @@ public class TrieST <V> {
 	public int size(){
 		return N;
 	}
+	
+	/**
+	 * contains wildcard '.' that matches any single character.
+	 * @param pattern
+	 * @return
+	 */
+	public Iterable<String> keysThatMatch(String pattern){
+		Queue<String> queue = new LinkedList<String>();
+		StringBuilder prefix = new StringBuilder();
+		collect(root, prefix, pattern, queue);
+		return queue;
+	}
+	
+	private void collect(Node cur, StringBuilder prefix, String pattern, Queue<String> queue){
+		if (cur == null) return;
+		int d = prefix.length();
+		if (d == pattern.length()){
+			if (cur.v != null)
+				queue.add(prefix.toString());
+			return;
+		}
+        char c = pattern.charAt(d);
+        if (c == '.') {
+            for (char ch = 0; ch < R; ch++) {
+                prefix.append(ch);
+                collect(cur.next[ch], prefix, pattern, queue);
+                prefix.deleteCharAt(prefix.length() - 1);
+            }
+        }
+        else {
+            prefix.append(c);
+            collect(cur.next[c], prefix, pattern, queue);
+            prefix.deleteCharAt(prefix.length() - 1);   // to 
+        }
+	}
 
 	public static void main(String[] args) {
 		TrieST<Integer>  trie = new TrieST<Integer>();
@@ -117,6 +152,12 @@ public class TrieST <V> {
 			System.out.println(key);
 		System.out.println(trie.longestPrefixof("lxchaha"));
 		System.out.println((int)'A');
+		
+		for (String key : trie.keysThatMatch(".i.")){
+			System.out.println("match:"+ key);
+		}
+		
+		
 	}
 
 }

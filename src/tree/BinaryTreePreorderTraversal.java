@@ -41,6 +41,36 @@ public class BinaryTreePreorderTraversal {
     	}
     	return orders;
     }
+    
+    /**
+     * 
+     * @param root
+     * @return
+     */
+	public List<Integer> preorderTraversal3(TreeNode root) {
+		ArrayList<Integer> orders = new ArrayList<Integer>();
+		TreeNode p = root;
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		while (p != null || !stack.isEmpty()) {
+			if (p != null) {
+				orders.add(p.val);
+				stack.push(p);
+				p = p.left;
+			} else if (stack.peek().right != null) {
+				p = stack.peek().right;
+			} else { // leaf node
+				p = stack.pop();
+				while (!stack.isEmpty() && p == stack.peek().right) { // right leaf node, pop the parent.
+					p = stack.pop();
+				}
+				if (!stack.isEmpty())
+					p = stack.peek().right;
+				else
+					p = null;
+			}
+		}
+		return orders;
+	}
     /**
      * http://www.cnblogs.com/AnnieKim/archive/2013/06/15/morristraversal.html
      * morris遍历
